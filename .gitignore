@@ -1,0 +1,10 @@
+# dependencies
+node_modules
+
+# misc
+/coverage
+npm-debug.log
+
+# system files
+.DS_Store
+Thumbs.db
