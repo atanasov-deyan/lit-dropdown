@@ -47,7 +47,7 @@ export class DropdownElement extends LitElement {
       ${when(
         this.isOpen,
         () => html`
-          <ul class="dropdown">
+          <ul class=${`dropdown ${this.alignment}`}>
             <slot></slot>
           </ul>
         `
@@ -58,7 +58,6 @@ export class DropdownElement extends LitElement {
   static styles = css`
     :host {
       position: relative;
-      display: block;
     }
 
     .button {
@@ -72,6 +71,7 @@ export class DropdownElement extends LitElement {
       cursor: pointer;
       transition: background-color 0.25s;
     }
+
     .button:hover {
       background-color: #005CF9;
     }
@@ -81,13 +81,39 @@ export class DropdownElement extends LitElement {
     }
 
     .dropdown {
-      padding: 4px;
-      margin: 0;
       list-style-type: none;
       border: 1px solid #333132;
       border-radius: 4px;
       max-height: 10em;
       overflow-y: scroll;
+      padding: 2px;
+      width: 100%;
+    }
+
+    .bottom {
+      position: absolute;
+      inset: 0px auto auto 0px;
+      transform: translate(0px, 20px);
+    }
+
+    .top {
+      position: absolute;
+      inset: auto auto 0px 0px;
+      transform: translate(0px, -20px);
+    }
+
+    .right {
+      position: absolute;
+      inset: -10px auto auto 0px;
+      margin: 0px;
+      transform: translate(120px);
+    }
+
+    .left {
+      position: absolute;
+      inset: -10px auto auto 0px;
+      margin: 0px;
+      transform: translate(-130px);
     }
 
     @media (prefers-color-scheme: light) {

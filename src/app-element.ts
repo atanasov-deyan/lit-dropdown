@@ -24,7 +24,7 @@ export class AppElement extends LitElement {
 
   render() {
     return html`
-      <dropdown-element label='Dropdown' alignment='top'>
+      <dropdown-element label='Dropdown'>
       ${this.items.map(item => (
         html`
           <li>
