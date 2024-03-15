@@ -1,7 +1,7 @@
 {
   "name": "vite-project",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "author": "Deyan Atanasov",
   "scripts": {
@@ -13,6 +13,13 @@
     "lit": "3.1.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "6.4.2",
+    "@testing-library/user-event": "14.5.2",
+    "@typescript-eslint/eslint-plugin": "7.2.0",
+    "@typescript-eslint/parser": "7.2.0",
+    "eslint": "8.57.0",
+    "eslint-import-resolver-typescript": "3.6.1",
+    "eslint-plugin-import": "2.29.1",
     "typescript": "5.2.2",
     "vite": "5.1.6"
   }
