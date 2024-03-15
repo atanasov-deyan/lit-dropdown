@@ -1,16 +1,11 @@
 import { LitElement, css, html } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 import './dropdown-element'
 
 @customElement('app-element')
 export class AppElement extends LitElement {
 
-  @property({ type: String })
-  label = ''
-
-  @property({ type: Boolean })
-  isOpen = false
-
+  @state()
   private items: string[] = [
     'Action 1',
     'Action 2',
@@ -25,13 +20,13 @@ export class AppElement extends LitElement {
   render() {
     return html`
       <dropdown-element label='Dropdown'>
-      ${this.items.map(item => (
-        html`
-          <li>
-            ${item}
-          </li>
-        `
-      ))}
+        ${this.items.map(item => (
+          html`
+            <li>
+              ${item}
+            </li>
+          `
+        ))}
       </dropdown-element>
     `
   }

@@ -1,18 +1,19 @@
 import { LitElement, css, html } from 'lit'
-import { customElement, property, query } from 'lit/decorators.js'
+import { customElement, property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
 type Alignment = 'left' | 'top' | 'right' | 'bottom'
 @customElement('dropdown-element')
 export class DropdownElement extends LitElement {
 
+  @state()
+  private isOpen: boolean = false
+
   @property({ type: String })
-  label = ''
+  label: string = ''
 
-  @property({ type: Boolean })
-  isOpen = false
 
-  @property({ attribute: true })
+  @property({ type: String })
   alignment: Alignment = 'bottom'
 
   private toggleDropdown(e: MouseEvent) {
@@ -20,8 +21,8 @@ export class DropdownElement extends LitElement {
     this.isOpen = !this.isOpen
   }
 
-  @query('.dropdown')
-  dropdownElement?: HTMLElement;
+  @query('#dropdown')
+  dropdownElement?: HTMLUListElement;
 
   connectedCallback() {
     super.connectedCallback()
@@ -47,7 +48,7 @@ export class DropdownElement extends LitElement {
       ${when(
         this.isOpen,
         () => html`
-          <ul class=${`dropdown ${this.alignment}`}>
+          <ul id="dropdown" class=${`dropdown ${this.alignment}`}>
             <slot></slot>
           </ul>
         `
