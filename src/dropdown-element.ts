@@ -1,13 +1,26 @@
 import { LitElement, css, html } from 'lit'
+import { provide } from '@lit/context'
 import { customElement, property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
+import { type DropdownContext, dropdownContext } from './dropdown-context'
 
 type Alignment = 'left' | 'top' | 'right' | 'bottom'
+
 @customElement('dropdown-element')
 export class DropdownElement extends LitElement {
+  @provide({context: dropdownContext })
+  dropdownContext: DropdownContext = {
+    activeItem: null,
+    setActiveItem: (activeItem: string) => {
+      this.dropdownContext = {
+        ...this.dropdownContext,
+        activeItem,
+      }
+    },
+  }
 
   @state()
-  private isOpen: boolean = false
+  private _isOpen: boolean = false
 
   @property({ type: String })
   label: string = ''
@@ -16,9 +29,9 @@ export class DropdownElement extends LitElement {
   @property({ type: String })
   alignment: Alignment = 'bottom'
 
-  private toggleDropdown(e: MouseEvent) {
+  private _toggleDropdown = (e: Event) => {
     e.stopPropagation()
-    this.isOpen = !this.isOpen
+    this._isOpen = !this._isOpen
   }
 
   @query('#dropdown')
@@ -26,32 +39,32 @@ export class DropdownElement extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
-    window.addEventListener('click', this.windowClickListener)
+    window.addEventListener('click', this._windowClickListener)
   }
 
   disconnectedCallback() {
-    window.removeEventListener('click', this.windowClickListener)
+    window.removeEventListener('click', this._windowClickListener)
     super.disconnectedCallback()
   }
 
-  private windowClickListener = (event: MouseEvent) => {
+  private _windowClickListener = (event: MouseEvent) => {
     if (this.dropdownElement && !this.dropdownElement.contains(event.target as Node)) {
-      this.isOpen = false
+      this._isOpen = false
     }
   }
 
   render() {
     return html`
-      <button class="button" @click=${this.toggleDropdown}>
+      <button class="button" @click=${this._toggleDropdown}>
         ${this.label}
       </button>
       ${when(
-        this.isOpen,
+        this._isOpen,
         () => html`
           <ul id="dropdown" class=${`dropdown ${this.alignment}`}>
             <slot></slot>
           </ul>
-        `
+        `,
         )}
     `
   }
@@ -89,6 +102,7 @@ export class DropdownElement extends LitElement {
       overflow-y: scroll;
       padding: 2px;
       width: 100%;
+      background-color: inherit;
     }
 
     .bottom {
@@ -115,15 +129,6 @@ export class DropdownElement extends LitElement {
       inset: -10px auto auto 0px;
       margin: 0px;
       transform: translate(-130px);
-    }
-
-    @media (prefers-color-scheme: light) {
-      a:hover {
-        color: #747bff;
-      }
-      button {
-        background-color: #F9FAFB;
-      }
     }
   `
 }
