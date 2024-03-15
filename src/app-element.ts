@@ -11,10 +11,27 @@ export class AppElement extends LitElement {
   @property({ type: Boolean })
   isOpen = false
 
+  private items: string[] = [
+    'Action 1',
+    'Action 2',
+    'Action 3',
+    'Action 4',
+    'Action 5',
+    'Action 6',
+    'Action 7',
+    'Action 8',
+  ]
+
   render() {
     return html`
-      <dropdown-element label='Dropdown'>
-        asd
+      <dropdown-element label='Dropdown' alignment='top'>
+      ${this.items.map(item => (
+        html`
+          <li>
+            ${item}
+          </li>
+        `
+      ))}
       </dropdown-element>
     `
   }
@@ -44,6 +61,17 @@ export class AppElement extends LitElement {
     button:focus,
     button:focus-visible {
       outline: 4px auto -webkit-focus-ring-color;
+    }
+
+
+    li:hover {
+      background-color: #333132;
+
+    }
+
+    li:active {
+      background-color: #e6efff;
+      color: #000;
     }
 
     @media (prefers-color-scheme: light) {
