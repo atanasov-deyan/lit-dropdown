@@ -11,21 +11,40 @@ export class DropdownElement extends LitElement {
   @property({ type: Boolean })
   isOpen = false
 
-  toggleDropdown() {
+  @property({ type: Array })
+  items: string[] = ['1', '2', '3']
+
+  @property({ type: String })
+  activeItem = ''
+
+  private toggleDropdown(e: MouseEvent) {
+    e.stopPropagation()
     this.isOpen = !this.isOpen
+  }
+
+  private setActive(item: string) {
+    this.activeItem = item
   }
 
   render() {
     return html`
       <button @click=${this.toggleDropdown}>
-        <slot></slot>
+        ${this.label}
       </button>
       ${when(
         this.isOpen,
         () => html`
           <ul>
-            <li>1</li>
-            <li>2</li>
+            ${this.items.map(item => (
+              html`
+                <li
+                  class=${this.activeItem === item ? 'active' : ''}
+                  @click=${() => this.setActive(item)}
+                >
+                  ${item}
+                </li>
+              `
+            ))}
           </ul>
         `
         )}
@@ -33,13 +52,6 @@ export class DropdownElement extends LitElement {
   }
 
   static styles = css`
-    :host {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 2rem;
-      text-align: center;
-    }
-
     button {
       border-radius: 8px;
       border: 1px solid transparent;
@@ -59,12 +71,29 @@ export class DropdownElement extends LitElement {
       outline: 4px auto -webkit-focus-ring-color;
     }
 
+    ul {
+      padding: 4px;
+      margin: 0;
+      list-style-type: none;
+      border: 1px solid #333132;
+      border-radius: 4px;
+    }
+
+    li {
+      text-align: start;
+      padding: 4px;
+    }
+
+    .active {
+      background-color: #333132;
+    }
+
     @media (prefers-color-scheme: light) {
       a:hover {
         color: #747bff;
       }
       button {
-        background-color: #f9f9f9;
+        background-color: #F9FAFB;
       }
     }
   `
