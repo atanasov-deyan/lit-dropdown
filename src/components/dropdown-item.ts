@@ -2,8 +2,8 @@ import { LitElement, css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { consume } from '@lit/context'
 
-import { type DropdownContext, dropdownContext } from './dropdown-context'
-import { noop } from './utils/noop'
+import { type DropdownContext, dropdownContext } from '../models/dropdown-context'
+import { noop } from '../utils/noop'
 
 @customElement('dropdown-item')
 export class DropdownItem extends LitElement {

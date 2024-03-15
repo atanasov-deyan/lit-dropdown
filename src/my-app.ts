@@ -1,10 +1,10 @@
 import { LitElement, css, html } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
-import './dropdown-element'
-import './dropdown-item'
+import './components/dropdown-element'
+import './components/dropdown-item'
 
-@customElement('app-element')
-export class AppElement extends LitElement {
+@customElement('my-app')
+export class MyApp extends LitElement {
 
   @state()
   private _items: string[] = [
@@ -47,6 +47,6 @@ export class AppElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'app-element': AppElement
+    'my-app': MyApp
   }
 }

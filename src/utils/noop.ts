@@ -1,3 +1,2 @@
 export const noop = (): void => {
-
 }

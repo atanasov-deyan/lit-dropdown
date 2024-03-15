@@ -2,7 +2,7 @@ import { LitElement, css, html } from 'lit'
 import { provide } from '@lit/context'
 import { customElement, property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
-import { type DropdownContext, dropdownContext } from './dropdown-context'
+import { type DropdownContext, dropdownContext } from '../models/dropdown-context'
 
 type Alignment = 'left' | 'top' | 'right' | 'bottom'
 
