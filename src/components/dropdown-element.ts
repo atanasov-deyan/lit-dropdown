@@ -4,6 +4,8 @@ import { customElement, property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { type DropdownContext, dropdownContext } from '../models/dropdown-context'
 
+import variables from '../css'
+
 type Alignment = 'left' | 'top' | 'right' | 'bottom'
 
 @customElement('dropdown-element')
@@ -75,32 +77,28 @@ export class DropdownElement extends LitElement {
     }
 
     .button {
-      border-radius: 8px;
+      border-radius: ${variables.borderRadius};
       border: 1px solid transparent;
       padding: 0.6em 1.2em;
       font-size: 1em;
       font-weight: 500;
       font-family: inherit;
-      background-color: #2E73FA;
+      background-color: ${variables.dodgerBlue};
       cursor: pointer;
       transition: background-color 0.25s;
     }
 
     .button:hover {
-      background-color: #005CF9;
-    }
-    .button:focus,
-    .button:focus-visible {
-      outline: 4px auto -webkit-focus-ring-color;
+      background-color: ${variables.blueRibbon};
     }
 
     .dropdown {
       list-style-type: none;
-      border: 1px solid #333132;
-      border-radius: 4px;
-      max-height: 10em;
+      border: 1px solid ${variables.mineShaft};
+      border-radius: ${variables.borderRadius};
+      max-height: 128px;
       overflow-y: scroll;
-      padding: 2px;
+      padding: ${variables.tinySpacing};
       width: 100%;
       background-color: inherit;
     }

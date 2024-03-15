@@ -4,6 +4,7 @@ import { consume } from '@lit/context'
 
 import { type DropdownContext, dropdownContext } from '../models/dropdown-context'
 import { noop } from '../utils/noop'
+import variables from '../css'
 
 @customElement('dropdown-item')
 export class DropdownItem extends LitElement {
@@ -35,18 +36,13 @@ export class DropdownItem extends LitElement {
 
   static styles = css`
     .item:hover {
-      background-color: #333132;
+      background-color: ${variables.mineShaft};
 
     }
 
-    .item:active {
-      background-color: #e6efff;
-      color: #000;
-    }
-
-    .active, .active:hover {
-      background-color: #e6efff;
-      color: #000;
+    .active, .active:hover, .item:active {
+      background-color: ${variables.zumthorBlue};
+      color: ${variables.black};
     }
   `
 }
