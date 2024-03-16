@@ -36,7 +36,7 @@ export class DropdownItem extends LitElement {
 
   static styles = css`
     .item:hover {
-      background-color: ${variables.mineShaft};
+      background-color: ${variables.thunder};
 
     }
 
