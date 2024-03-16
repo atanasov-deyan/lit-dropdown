@@ -3,6 +3,8 @@ import { provide } from '@lit/context'
 import { customElement, property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
+import './my-button'
+import { ButtonSize, type ButtonType } from './my-button'
 import { type DropdownContext, dropdownContext } from '../models/dropdown-context'
 import variables from '../css'
 
@@ -31,6 +33,12 @@ export class DropdownElement extends LitElement {
   @property({ type: String })
   alignment: Alignment = 'bottom'
 
+  @property({ type: String })
+  type: ButtonType = 'primary'
+
+  @property({ type: String })
+  size: ButtonSize = 'middle'
+
   private _toggleDropdown = (e: Event) => {
     e.stopPropagation()
     this._isOpen = !this._isOpen
@@ -39,6 +47,8 @@ export class DropdownElement extends LitElement {
   @query('#dropdown')
   dropdownElement?: HTMLUListElement;
 
+  @query('#btn')
+  buttonEl?: HTMLButtonElement
   connectedCallback() {
     super.connectedCallback()
     window.addEventListener('click', this._windowClickListener)
@@ -56,14 +66,20 @@ export class DropdownElement extends LitElement {
   }
 
   render() {
+    console.log(this.buttonEl)
     return html`
-      <button class="button" @click=${this._toggleDropdown}>
+      <my-button
+        id="btn"
+        .onClick=${this._toggleDropdown}
+        type=${this.type}
+        size=${this.size}
+        >
         ${this.label}
-      </button>
+      </my-button>
       ${when(
         this._isOpen,
         () => html`
-          <ul id="dropdown" class=${`dropdown ${this.alignment}`}>
+          <ul id="dropdown" class=${`dropdown ${this.alignment}-${this.size}`}>
             <slot></slot>
           </ul>
         `,
@@ -76,57 +92,92 @@ export class DropdownElement extends LitElement {
       position: relative;
     }
 
-    .button {
-      border-radius: ${variables.borderRadius};
-      border: 1px solid transparent;
-      padding: 0.6em 1.2em;
-      font-size: 1em;
-      font-weight: 500;
-      font-family: inherit;
-      background-color: ${variables.dodgerBlue};
-      cursor: pointer;
-      transition: background-color 0.25s;
-    }
-
-    .button:hover {
-      background-color: ${variables.blueRibbon};
-    }
-
     .dropdown {
       list-style-type: none;
-      border: 1px solid ${variables.mineShaft};
+      border: 1px solid ${variables.thunder};
       border-radius: ${variables.borderRadius};
       max-height: 128px;
       overflow-y: scroll;
       padding: ${variables.tinySpacing};
       width: 100%;
-      background-color: inherit;
+      min-width: 100px;
+      background-color: ${variables.mineShaft};
     }
 
-    .bottom {
+    .bottom-middle {
+      position: absolute;
+      inset: 0px auto auto 0px;
+      transform: translate(0px, ${variables.mediumSpacing});
+    }
+
+    .top-middle {
+      position: absolute;
+      inset: auto auto 0px 0px;
+      transform: translate(0px, -${variables.mediumSpacing});
+    }
+
+    .right-middle {
+      position: absolute;
+      inset: -10px auto auto 0px;
+      margin: 0px;
+      transform: translate(95px);
+    }
+
+    .left-middle {
+      position: absolute;
+      inset: -10px auto auto 0px;
+      margin: 0px;
+      transform: translate(-110px);
+    }
+    .bottom-small {
+      position: absolute;
+      inset: 0px auto auto 0px;
+      transform: translate(0px, 12px);
+    }
+
+    .top-small {
+      position: absolute;
+      inset: auto auto 0px 0px;
+      transform: translate(0px, -8px);
+    }
+
+    .right-small {
+      position: absolute;
+      inset: -2px auto auto 0px;
+      margin: 0px;
+      transform: translate(80px);
+    }
+
+    .left-small {
+      position: absolute;
+      inset: -10px auto auto 0px;
+      margin: 0px;
+      transform: translate(-130px);
+    }
+    .bottom-large {
       position: absolute;
       inset: 0px auto auto 0px;
       transform: translate(0px, 20px);
     }
 
-    .top {
+    .top-large {
       position: absolute;
       inset: auto auto 0px 0px;
       transform: translate(0px, -20px);
     }
 
-    .right {
+    .right-large {
       position: absolute;
-      inset: -10px auto auto 0px;
+      inset: -14px auto auto 0px;
       margin: 0px;
-      transform: translate(120px);
+      transform: translate(128px);
     }
 
-    .left {
+    .left-large {
       position: absolute;
-      inset: -10px auto auto 0px;
+      inset: -14px auto auto 0px;
       margin: 0px;
-      transform: translate(-130px);
+      transform: translate(-142px);
     }
   `
 }

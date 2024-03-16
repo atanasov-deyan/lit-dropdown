@@ -20,7 +20,7 @@ export class MyApp extends LitElement {
 
   render() {
     return html`
-      <dropdown-element label='Dropdown'>
+      <dropdown-element label="Dropdown very long" alignment="right" size="large">
         ${this._items.map(item => (
           html`
             <dropdown-item
