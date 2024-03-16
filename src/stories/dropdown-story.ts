@@ -45,7 +45,6 @@ export class DropdownStory extends LitElement {
   ]
   @state()
   _settings: Settings = {
-    // todo: pass default active option
     size: 'middle',
     type: 'primary',
     alignment: 'bottom',
@@ -54,7 +53,6 @@ export class DropdownStory extends LitElement {
   private _setSettings = (settings: Settings) => this._settings = settings
 
   private _onChange = (e: Event) => {
-    e.stopPropagation()
     const target = e.target as HTMLSelectElement
     const { selectedOptions, name } = target
     const [selectedOption] = selectedOptions
@@ -65,51 +63,64 @@ export class DropdownStory extends LitElement {
     })
   }
 
+  navTemplate() {
+    return html`
+      <nav class="nav">
+        ${actions.map(action =>
+          html`
+            <div class="select-container">
+              <label for=${`${action.label}-select`}>Select dropdown ${action.label}</label>
+              <select
+                id=${`${action.label}-select`}
+                name=${action.label}
+                @change=${this._onChange}
+              >
+                ${action.options.map(option =>
+                  html`
+                    <option
+                      value=${option}
+                      ?selected=${option === this._settings[action.label]}
+
+                    >
+                      ${option}
+                    </option>
+                  `,
+                  )}
+              </select>
+            </div>
+          `,
+          )}
+      </nav>
+    `
+  }
+
+  bodyTemplate() {
+    return html`
+      <dropdown-element
+        label="Dropdown"
+        size=${this._settings.size}
+        type=${this._settings.type}
+        alignment=${this._settings.alignment}
+      >
+        ${this._items.map(item => (
+          html`
+            <dropdown-item
+              id=${item}
+            >
+              ${item}
+          </dropdown-item>
+          `
+        ))}
+      </dropdown-element>
+    `
+  }
+
   render() {
     return html`
       <div>
-        <nav class="nav">
-          ${actions.map(action =>
-            html`
-              <div class="select-container">
-                <label for=${`${action.label}-select`}>Select dropdown ${action.label}</label>
-                <select
-                  id=${`${action.label}-select`}
-                  name=${action.label}
-                  @change=${this._onChange}
-                >
-                  ${action.options.map(option =>
-                    html`
-                      <option
-                        value=${option}
-                        ?selected=${option === this._settings[action.label]}
+        ${this.navTemplate()}
 
-                      >
-                        ${option}
-                      </option>
-                    `,
-                    )}
-                </select>
-              </div>
-            `,
-            )}
-        </nav>
-        <dropdown-element
-          label="Dropdown"
-          size=${this._settings.size}
-          type=${this._settings.type}
-          alignment=${this._settings.alignment}
-        >
-          ${this._items.map(item => (
-            html`
-              <dropdown-item
-                id=${item}
-              >
-                ${item}
-            </dropdown-item>
-            `
-          ))}
-        </dropdown-element>
+        ${this.bodyTemplate()}
       </div>
     `
   }
