@@ -45,7 +45,7 @@ export class DropdownElement extends LitElement {
   }
 
   @query('#dropdown')
-  dropdownElement?: HTMLUListElement;
+  _dropdownElement?: HTMLUListElement
 
   connectedCallback() {
     super.connectedCallback()
@@ -58,7 +58,7 @@ export class DropdownElement extends LitElement {
   }
 
   private _windowClickListener = (event: MouseEvent) => {
-    if (this.dropdownElement && !this.dropdownElement.contains(event.target as Node)) {
+    if (this._dropdownElement && !this._dropdownElement.contains(event.target as Node)) {
       this._isOpen = false
     }
   }

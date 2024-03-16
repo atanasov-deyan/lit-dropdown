@@ -2,4 +2,4 @@ export const toClassName = (classNames: (string | undefined)[]): string => class
   .filter(Boolean)
   .join(' ')
   .replace(/\s+/g, ' ')
-  .trim();
+  .trim()

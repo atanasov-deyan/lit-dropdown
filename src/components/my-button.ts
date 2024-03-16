@@ -1,12 +1,12 @@
 import { LitElement, css, html } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
-import variables from '../css';
-import { toClassName } from '../utils/toClassName';
+import variables from '../css'
+import { toClassName } from '../utils/toClassName'
 
-export type ButtonSize = 'small' | 'middle' | 'large';
-type ButtonHtmlType = 'submit' | 'button' | 'reset';
-export type ButtonType = 'default' | 'primary' | 'ghost' | 'text' | 'danger' | 'success' | 'warning';
+export type ButtonSize = 'small' | 'middle' | 'large'
+type ButtonHtmlType = 'submit' | 'button' | 'reset'
+export type ButtonType = 'default' | 'primary' | 'ghost' | 'text' | 'danger' | 'success' | 'warning'
 
 @customElement('my-button')
 export class MyButton extends LitElement {
@@ -82,7 +82,7 @@ export class MyButton extends LitElement {
     }
 
     .button-ghost {
-      background-color: ${variables.mischkaGrey};
+      background-color: ${variables.ghost};
       color: ${variables.black};
     }
 
@@ -99,7 +99,7 @@ export class MyButton extends LitElement {
     }
 
     .button-ghost:active {
-      background-color: ${variables.ghost};
+      background-color: ${variables.mischkaGrey};
     }
 
     .button-default:hover {
@@ -111,7 +111,7 @@ export class MyButton extends LitElement {
     }
 
     .button-ghost:hover {
-      background-color: ${variables.ghost};
+      background-color: ${variables.mischkaGrey};
     }
 
     .button:disabled {

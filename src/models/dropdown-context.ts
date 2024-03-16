@@ -5,4 +5,4 @@ export type DropdownContext = {
   setActiveItem: (itemId: string) => void
 }
 
-export const dropdownContext = createContext<DropdownContext>('dropdownContext');
+export const dropdownContext = createContext<DropdownContext>('dropdownContext')
