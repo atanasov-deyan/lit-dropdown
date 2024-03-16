@@ -47,8 +47,6 @@ export class DropdownElement extends LitElement {
   @query('#dropdown')
   dropdownElement?: HTMLUListElement;
 
-  @query('#btn')
-  buttonEl?: HTMLButtonElement
   connectedCallback() {
     super.connectedCallback()
     window.addEventListener('click', this._windowClickListener)
@@ -66,7 +64,6 @@ export class DropdownElement extends LitElement {
   }
 
   render() {
-    console.log(this.buttonEl)
     return html`
       <my-button
         id="btn"
@@ -118,16 +115,15 @@ export class DropdownElement extends LitElement {
 
     .right-middle {
       position: absolute;
-      inset: -10px auto auto 0px;
+      inset: -8px auto auto 100%;
       margin: 0px;
-      transform: translate(95px);
     }
 
     .left-middle {
       position: absolute;
-      inset: -10px auto auto 0px;
+      inset: -8px auto auto 0px;
       margin: 0px;
-      transform: translate(-110px);
+      transform: translate(-102%);
     }
     .bottom-small {
       position: absolute;
@@ -143,16 +139,15 @@ export class DropdownElement extends LitElement {
 
     .right-small {
       position: absolute;
-      inset: -2px auto auto 0px;
+      inset: -2px auto auto 100%;
       margin: 0px;
-      transform: translate(80px);
     }
 
     .left-small {
       position: absolute;
-      inset: -10px auto auto 0px;
+      inset: -2px auto auto 0px;
       margin: 0px;
-      transform: translate(-130px);
+      transform: translate(-102%);
     }
     .bottom-large {
       position: absolute;
@@ -168,16 +163,15 @@ export class DropdownElement extends LitElement {
 
     .right-large {
       position: absolute;
-      inset: -14px auto auto 0px;
+      inset: -14px auto auto 100%;
       margin: 0px;
-      transform: translate(128px);
     }
 
     .left-large {
       position: absolute;
       inset: -14px auto auto 0px;
       margin: 0px;
-      transform: translate(-142px);
+      transform: translate(-102%);
     }
   `
 }
