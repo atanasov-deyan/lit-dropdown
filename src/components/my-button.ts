@@ -88,7 +88,6 @@ export class MyButton extends LitElement {
 
     .button-text {
       background-color: transparent;
-      color: ${variables.black};
     }
 
     .button-default:active {
