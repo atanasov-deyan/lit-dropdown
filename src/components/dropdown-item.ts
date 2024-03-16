@@ -8,8 +8,6 @@ import variables from '../css'
 
 @customElement('dropdown-item')
 export class DropdownItem extends LitElement {
-
-
   @property({ type: String })
   id = ''
 

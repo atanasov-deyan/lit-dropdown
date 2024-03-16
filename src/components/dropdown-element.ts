@@ -8,7 +8,7 @@ import { ButtonSize, type ButtonType } from './my-button'
 import { type DropdownContext, dropdownContext } from '../models/dropdown-context'
 import variables from '../css'
 
-type Alignment = 'left' | 'top' | 'right' | 'bottom'
+export type Alignment = 'left' | 'top' | 'right' | 'bottom'
 
 @customElement('dropdown-element')
 export class DropdownElement extends LitElement {
@@ -66,7 +66,6 @@ export class DropdownElement extends LitElement {
   render() {
     return html`
       <my-button
-        id="btn"
         .onClick=${this._toggleDropdown}
         type=${this.type}
         size=${this.size}
