@@ -1,39 +1,14 @@
 import { LitElement, css, html } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
-import './components/dropdown-element'
-import './components/dropdown-item'
+import { customElement } from 'lit/decorators.js'
+import './stories/dropdown-story'
 
 @customElement('my-app')
 export class MyApp extends LitElement {
 
-  @state()
-  private _items: string[] = [
-    'Action 1',
-    'Action 2',
-    'Action 3',
-    'Action 4',
-    'Action 5',
-    'Action 6',
-    'Action 7',
-    'Action 8',
-  ]
 
   render() {
     return html`
-      <dropdown-element
-        label="Dropdown"
-        alignment="right"
-      >
-        ${this._items.map(item => (
-          html`
-            <dropdown-item
-              id=${item}
-            >
-              ${item}
-          </dropdown-item>
-          `
-        ))}
-      </dropdown-element>
+      <dropdown-story></dropdown-story>
     `
   }
 
@@ -46,7 +21,6 @@ export class MyApp extends LitElement {
     }
   `
 }
-
 
 declare global {
   interface HTMLElementTagNameMap {
