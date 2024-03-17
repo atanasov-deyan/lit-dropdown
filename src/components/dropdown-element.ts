@@ -75,7 +75,7 @@ export class DropdownElement extends LitElement {
       ${when(
         this._isOpen,
         () => html`
-          <ul id="dropdown" class=${`dropdown ${this.alignment}-${this.size}`}>
+          <ul id="dropdown" class=${`dropdown ${this.alignment}-${this.size} animate`}>
             <slot></slot>
           </ul>
         `,
@@ -171,6 +171,28 @@ export class DropdownElement extends LitElement {
       inset: -14px auto auto 0px;
       margin: 0px;
       transform: translate(-102%);
+    }
+
+    .animate {
+      animation-duration: 0.5s;
+      animation-delay: 0.3s;
+      animation-name: animate-fade;
+      animation-timing-function: cubic-bezier(.26, .53, .74, 1.48);
+      animation-fill-mode: backwards;
+    }
+
+    .animate.fade {
+      animation-name: animate-fade;
+      animation-timing-function: ease;
+    }
+
+    @keyframes animate-fade {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      .animate { animation: none !important; }
     }
   `
 }
